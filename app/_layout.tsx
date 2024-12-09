@@ -1,39 +1,39 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+import { useState } from "react";
+import { Stack } from "expo-router";
+import HeaderLogin from "@/components/profile/HeaderProfileIcon";
+import { Modal, TouchableOpacity, StyleSheet, View, Text } from "react-native";
+import ProfileModal from "@/components/profile/ProfileModal";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
+  const [profileModal, setProfileModalVisible] = useState(false);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+    <>
+      <Stack screenOptions={{
+            headerStyle: {
+              backgroundColor: "#121212",
+            },
+            headerTitle: '',
+            headerShadowVisible: false,
+            headerRight: () => <HeaderLogin onPress={() => setProfileModalVisible(true)} />,
+            contentStyle: {
+              backgroundColor: "#121212",
+              padding: 10
+            },
+            headerTintColor: "#fff"
+          }}
+        >
+        <Stack.Screen
+          name="(tabs)"
+          options={{
+            contentStyle: {
+              padding: 0
+            }
+          }}
+        />
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+
+      <ProfileModal setProfileModalVisible={setProfileModalVisible} profileModal={profileModal} />
+    </>
   );
 }
