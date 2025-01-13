@@ -1,12 +1,16 @@
 import React, {useState} from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { View, Text, Image, TextInput, ScrollView, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback } from "react-native";
+import { View, Text, Image, TextInput, ScrollView, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback, NativeSyntheticEvent, TextInputSubmitEditingEventData } from "react-native";
 import styles from "@/styles/plan/itinerary/day/DayDetailsStyles";
 
 // TODO: Given the day id and itinerary id, fetch data and then populate
 const DayDetails = () => {
   const [searchValue, setSearchValue] = useState("");
   const insets = useSafeAreaInsets();
+
+  const callBackendAPI = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+    alert(e.target);
+  }
 
   return (
     <KeyboardAvoidingView
@@ -59,6 +63,7 @@ const DayDetails = () => {
               placeholderTextColor="#777"
               value={searchValue}
               onChangeText={setSearchValue}
+              onSubmitEditing={callBackendAPI}
             />
           </View>
         </View>
