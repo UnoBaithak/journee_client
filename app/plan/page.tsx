@@ -18,7 +18,7 @@ export default function PlanPage() {
 
   const handleSearch = async (e: React.FormEvent) => {
       e.preventDefault()
-      const res = await fetch("http://localhost:8080/api/itinerary/generate", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/itinerary/generate`, {
           method: "POST",
           body: JSON.stringify({"user_input": searchQuery}),
           headers: {

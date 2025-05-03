@@ -62,7 +62,7 @@ export default function ItineraryViewPage() {
     const fetchItinerary = async () => {
       try {
         // Simulating API call delay
-        const itinerary = await(await fetch('http://localhost:8080/api/itinerary/' + itineraryId)).json(); 
+        const itinerary = await(await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/itinerary/${itineraryId}`)).json(); 
         setItineraryDetails(itinerary)
         setLoading(false)
       } catch (error) {

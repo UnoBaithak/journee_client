@@ -63,7 +63,7 @@ export default function ItineraryPlanPage() {
   useEffect(() => {
     const fetchItinerary = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/itinerary/${itineraryId}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/itinerary/${itineraryId}`)
         const data = await response.json()
 
         setItinerary(data)

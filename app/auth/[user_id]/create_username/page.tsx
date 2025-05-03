@@ -69,7 +69,7 @@ export default function CreateUsernamePage() {
         }
 
         const res = await (
-            await fetch(`http://localhost:8080/api/auth/create_username`, {
+            await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/auth/create_username`, {
                 method: "POST",
                 body: JSON.stringify({ "username": username, "userid": userId }),
                 headers: {

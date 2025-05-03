@@ -38,7 +38,7 @@ export default function UserProfilePage() {
     // In a real app, fetch the user profile from an API
     const fetchUserProfile = async () => {
       try {
-        const user = await(await fetch(`http://localhost:8080/api/user/${username}`)).json();
+        const user = await(await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/user/${username}`)).json();
 
         setProfile(user);
         setLoading(false)
