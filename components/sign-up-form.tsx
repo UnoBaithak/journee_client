@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -11,6 +12,7 @@ import { Mail, Lock, User } from "lucide-react"
 import GoogleSignIn from "@/components/google-sign-in"
 
 export default function SignUpForm() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,18 +28,27 @@ export default function SignUpForm() {
     e.preventDefault()
     // Handle form submission here
     console.log("Sign up data:", formData)
+
+    // In a real app, you would send this data to your API
+    // For now, simulate creating a user and redirect to create password page
+    const userId = "new-user-123" // This would come from your API
+    router.push(`/auth/${userId}/create_password`)
   }
 
   const handleGoogleSignIn = (response: any) => {
     // Handle Google Sign-In response
     console.log("Google Sign-In successful:", response)
     // You would typically send this to your backend
+
+    // For now, simulate creating a user and redirect to create username page
+    const userId = "google-user-123" // This would come from your API
+    router.push(`/auth/${userId}/create_username`)
   }
 
   return (
     <Card className="p-6">
       <div className="space-y-6">
-        <GoogleSignIn text={"signup_with"} onSuccess={handleGoogleSignIn} />
+        <GoogleSignIn text={"singup_with"} onSuccess={handleGoogleSignIn} />
 
         <div className="relative flex items-center">
           <div className="flex-grow border-t border-gray-200"></div>

@@ -17,9 +17,9 @@ export default function GoogleSignIn({ text, onSuccess }: GoogleSignInProps) {
       if (window.google && googleSignInButtonRef.current) {
         try {
           window.google.accounts.id.initialize({
-            client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "YOUR_GOOGLE_CLIENT_ID", // Replace with your actual client ID
-            login_uri: "http://localhost:8080/api/auth/google-callback",
-            ux_mode: "redirect"
+            client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "YOUR_GOOGLE_CLIENT_ID", // Replace with your actual client ID,
+            ux_mode: "redirect",
+            login_uri: "http://localhost:8080/api/auth/google-callback"
           })
 
           window.google.accounts.id.renderButton(googleSignInButtonRef.current, {

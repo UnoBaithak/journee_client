@@ -1,6 +1,6 @@
-import AuthPage from "@/components/auth-page"
-import { redirect } from "next/navigation";
+import { redirect } from "next/navigation"
 
 export default function Home() {
-  redirect('/plan')
+  // Redirect to the plan page
+  redirect("/plan")
 }

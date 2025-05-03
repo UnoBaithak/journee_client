@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -11,6 +12,7 @@ import { Mail, Lock } from "lucide-react"
 import GoogleSignIn from "@/components/google-sign-in"
 
 export default function LoginForm() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -25,12 +27,19 @@ export default function LoginForm() {
     e.preventDefault()
     // Handle form submission here
     console.log("Login data:", formData)
+
+    // In a real app, you would authenticate with your API
+    // For now, simulate login and redirect to plan page
+    router.push("/plan")
   }
 
   const handleGoogleSignIn = (response: any) => {
     // Handle Google Sign-In response
     console.log("Google Sign-In successful:", response)
     // You would typically send this to your backend
+
+    // For now, simulate login and redirect to plan page
+    router.push("/plan")
   }
 
   return (
