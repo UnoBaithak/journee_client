@@ -58,7 +58,6 @@ export default function ItineraryViewPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // In a real app, fetch the itinerary data from an API
     const fetchItinerary = async () => {
       try {
         // Simulating API call delay
