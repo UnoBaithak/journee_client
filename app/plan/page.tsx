@@ -10,25 +10,29 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useConversation } from "./conversation_context"
 import { useRouter } from "next/navigation"
+import Loading from "./loading"
 
 export default function PlanPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const { conversationDetails, setConversationDetails } = useConversation()
+  const [loading, setLoading] = useState(false)
   const router = useRouter();
 
   const handleSearch = async (e: React.FormEvent) => {
-      e.preventDefault()
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/itinerary/generate`, {
-          method: "POST",
-          body: JSON.stringify({"user_input": searchQuery}),
-          headers: {
-              "Content-Type": "application/json"
-            }
-        })
-        
-        let {conversation_id, itinerary_id} = await res.json();
-        setConversationDetails({conversation_id, itinerary_id})
-        router.push(`/plan/${itinerary_id}`)
+    e.preventDefault()
+    setLoading(true)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/itinerary/generate`, {
+      method: "POST",
+      body: JSON.stringify({"user_input": searchQuery}),
+      headers: {
+          "Content-Type": "application/json"
+        }
+    })
+    
+    let {conversation_id, itinerary_id} = await res.json();
+    setConversationDetails({conversation_id, itinerary_id})
+    router.push(`/plan/${itinerary_id}`)
+    setLoading(false)
   }
 
   // Popular destinations with images
@@ -38,6 +42,12 @@ export default function PlanPage() {
     { name: "New York", country: "USA", image: "/placeholder.svg?height=200&width=300" },
     { name: "Bali", country: "Indonesia", image: "/placeholder.svg?height=200&width=300" },
   ]
+
+  if (loading) {
+    return (
+      <Loading />
+    )
+  }
 
   return (
     <main className="min-h-screen flex flex-col bg-gradient-to-b from-white to-sky-50 dark:from-gray-900 dark:to-gray-800">
