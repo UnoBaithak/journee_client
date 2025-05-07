@@ -10,44 +10,8 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { useItinerary } from "@/app/itinerary/itinerary_context"
-
-// Define TypeScript interfaces based on the JSON schema
-interface POI {
-  name: string
-  lat: number
-  lon: number
-  category: string | null
-  description: string
-  website: string
-}
-
-interface Activity {
-  activity_id: string
-  pois: POI[]
-  title: string
-  time: string
-  duration: number
-  category: string
-  description: string
-}
-
-interface DayDetails {
-  day_id: string
-  activities: Activity[]
-}
-
-interface Itinerary {
-  _id: string
-  metadata: {
-    destination: string
-    num_days: number
-    preferences: string
-  }
-  title: string
-  details: DayDetails[]
-  created_at: string
-  updated_at: string
-}
+import { formatTime, getCategoryColor } from "@/utils/itinerary-utils"
+import { DayDetails } from "@/types/itinerary"
 
 export default function DayViewPage() {
   const params = useParams()
@@ -55,39 +19,13 @@ export default function DayViewPage() {
   const itineraryId = params.itinerary_id as string
   const dayId = params.day_id as string
   const formattedDayId = dayId.replace("-", " ").replace(/\b\w/g, (l) => l.toUpperCase())
-  const dayNumber = parseInt(dayId.split("-").at(1)?.trim()??"1")
+  const dayNumber = parseInt(dayId.split("-").at(1)?.trim() ?? "1")
 
-  const {itineraryDetails, setItineraryDetails} = useItinerary();
+  const { itineraryDetails, setItineraryDetails } = useItinerary();
 
-  const [dayDetails, setDayDetails] = useState<DayDetails | undefined>(itineraryDetails?.details[dayNumber-1])
+  const [dayDetails, setDayDetails] = useState<DayDetails | undefined>(itineraryDetails?.details[dayNumber - 1])
   const [loading, setLoading] = useState(false)
 
-  const formatTime = (timeString: string) => {
-    try {
-      const date = new Date(timeString)
-      return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-    } catch (e) {
-      return "Time not available"
-    }
-  }
-
-  // Function to get category color
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case "Nature & Sightseeing":
-        return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
-      case "Adventure":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
-      case "Relaxation":
-        return "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300"
-      case "Travel":
-        return "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
-      default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
-    }
-  }
-
-  // Function to get icon for activity category
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case "Nature & Sightseeing":
@@ -198,7 +136,7 @@ export default function DayViewPage() {
               <div className="relative">
                 {/* Timeline line */}
                 <div className="absolute left-0 md:left-1/4 w-px h-full bg-gray-200 dark:bg-gray-700 transform translate-x-4 md:translate-x-0"></div>
-                
+
                 <div className="space-y-8 ml-10 md:ml-0">
                   {dayDetails.activities.map((activity, index) => (
                     <div key={activity.activity_id} className="relative">
@@ -206,7 +144,7 @@ export default function DayViewPage() {
                       <div className="absolute left-0 md:left-1/4 w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-900 border-4 border-teal-500 dark:border-teal-600 transform -translate-x-4 md:-translate-x-4 flex items-center justify-center">
                         {getCategoryIcon(activity.category)}
                       </div>
-                      
+
                       <div className="md:ml-[calc(25%+2rem)]">
                         <Card className="overflow-hidden">
                           <CardHeader className="pb-2">
@@ -225,7 +163,7 @@ export default function DayViewPage() {
                           </CardHeader>
                           <CardContent>
                             <p className="text-gray-700 dark:text-gray-300">{activity.description}</p>
-                            
+
                             {activity.pois.length > 0 && (
                               <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-md">
                                 <h4 className="font-medium mb-3">Points of Interest:</h4>
@@ -241,9 +179,9 @@ export default function DayViewPage() {
                                       </div>
                                       <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{poi.description}</p>
                                       {poi.website && (
-                                        <a 
-                                          href={`https://${poi.website}`} 
-                                          target="_blank" 
+                                        <a
+                                          href={`https://${poi.website}`}
+                                          target="_blank"
                                           rel="noopener noreferrer"
                                           className="text-sm text-teal-600 hover:underline dark:text-teal-400 mt-1 inline-block"
                                         >
@@ -260,7 +198,7 @@ export default function DayViewPage() {
                       </div>
                     </div>
                   ))
-                }
+                  }
                 </div>
               </div>
             </TabsContent>
