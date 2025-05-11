@@ -27,12 +27,11 @@ export default function ItineraryPlanPage() {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/itinerary/${itineraryId}`)
                 const data = await response.json()
 
-                setItinerary(data)
-                if (conversationDetails?.itinerary_id && conversationDetails?.conversation_id) {
+                setItinerary(data["itinerary"])
+                if (conversationDetails?.itinerary_id) {
                     setConversationDetails({ 
                         itinerary_id: conversationDetails?.itinerary_id, 
-                        conversation_id: conversationDetails?.conversation_id, 
-                        itineraryDetails: data 
+                        itineraryDetails: data["itinerary"]
                     })
                 }
                 setLoading(false)
@@ -43,7 +42,7 @@ export default function ItineraryPlanPage() {
         }
 
         fetchItinerary()
-    }, [itineraryId, conversationDetails?.conversation_id, conversationDetails?.itinerary_id])
+    }, [itineraryId, conversationDetails?.itinerary_id])
 
     const saveItinerary = () => {
         router.push(`/itinerary/${itineraryId}`)

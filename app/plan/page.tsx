@@ -29,8 +29,8 @@ export default function PlanPage() {
         }
     })
     
-    let {conversation_id, itinerary_id} = await res.json();
-    setConversationDetails({conversation_id, itinerary_id, itineraryDetails: null})
+    let {itinerary_id} = await res.json();
+    setConversationDetails({itinerary_id, itineraryDetails: null})
     router.push(`/plan/${itinerary_id}`)
     setLoading(false)
   }
