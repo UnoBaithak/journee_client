@@ -20,36 +20,15 @@ export default function DayViewPage() {
   const itineraryId = params.itinerary_id as string
   const dayId = params.day_id as string
   const formattedDayId = dayId.replace("-", " ").replace(/\b\w/g, (l) => l.toUpperCase())
-  const dayNumber = parseInt(formattedDayId.split("-").at(1)?.trim() ?? "1")
+  const dayNumber = parseInt(dayId.split("-").at(1)?.trim() ?? "1")
 
   const { itineraryDetails, setItineraryDetails } = useItinerary();
 
   const dayDetails = itineraryDetails?.details[dayNumber-1]
-  // const [loading, setLoading] = useState(false)
 
   const editDay = () => {
     router.push(`/plan/${itineraryId}/day/${dayId}`)
   }
-
-  // if (loading) {
-  //   return (
-  //     <main className="min-h-screen bg-gradient-to-b from-white to-sky-50 dark:from-gray-900 dark:to-gray-800">
-  //       <div className="p-4 md:p-8">
-  //         <div className="max-w-6xl mx-auto">
-  //           <Skeleton className="h-8 w-32 mb-4" />
-  //           <Skeleton className="h-12 w-3/4 mb-4" />
-  //           <Skeleton className="h-6 w-1/2 mb-8" />
-
-  //           <div className="space-y-4">
-  //             {[1, 2, 3].map((i) => (
-  //               <Skeleton key={i} className="h-48 rounded-lg" />
-  //             ))}
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </main>
-  //   )
-  // }
 
   if (!itineraryDetails || !dayDetails) {
     return (
