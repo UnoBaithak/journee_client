@@ -27,6 +27,12 @@ export default function ItineraryPlanPage() {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/itinerary/${itineraryId}`)
                 const data = await response.json()
 
+                if (data["canEdit"] != true) {
+                    router.push(`/itinerary/${itineraryId}`)
+                    setLoading(false)
+                    return
+                }
+
                 setItinerary(data["itinerary"])
                 if (conversationDetails?.itinerary_id) {
                     setConversationDetails({ 

@@ -20,7 +20,7 @@ export default function DayViewPage() {
   const itineraryId = params.itinerary_id as string
   const dayId = params.day_id as string
   const formattedDayId = dayId.replace("-", " ").replace(/\b\w/g, (l) => l.toUpperCase())
-  const dayNumber = parseInt(dayId.split("-").at(1)?.trim() ?? "1")
+  const dayNumber = parseInt(formattedDayId.split("-").at(1)?.trim() ?? "1")
 
   const { itineraryDetails, setItineraryDetails } = useItinerary();
 

@@ -9,8 +9,7 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Journee - Travel Adventures",
-  description: "Sign up for Journee and discover your next travel adventure",
-    generator: 'v0.dev'
+  description: "Sign up for Journee and discover your next travel adventure"
 }
 
 export default function RootLayout({
