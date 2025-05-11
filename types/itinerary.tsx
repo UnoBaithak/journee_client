@@ -18,7 +18,7 @@ export interface Activity {
 }
 
 export interface DayDetails {
-    day_id: string
+    day_id: number
     activities: Activity[]
 }
 

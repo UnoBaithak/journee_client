@@ -19,12 +19,14 @@ export default function DayViewPage() {
   const router = useRouter()
   const itineraryId = params.itinerary_id as string
   const dayId = params.day_id as string
-  const formattedDayId = dayId.replace("-", " ").replace(/\b\w/g, (l) => l.toUpperCase())
-  const dayNumber = parseInt(dayId.split("-").at(1)?.trim() ?? "1")
-
+  console.log(dayId)
+  const formattedDayId = `Day ${dayId}`
+  const dayNumber = parseInt(dayId)
+  console.log(dayNumber);
   const { itineraryDetails, setItineraryDetails } = useItinerary();
 
   const dayDetails = itineraryDetails?.details[dayNumber-1]
+  console.log(dayDetails)
 
   const editDay = () => {
     router.push(`/plan/${itineraryId}/day/${dayId}`)

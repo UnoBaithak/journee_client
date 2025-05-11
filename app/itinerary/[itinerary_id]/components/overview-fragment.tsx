@@ -14,7 +14,7 @@ function DayCard({day, itineraryId}: {day: DayDetails, itineraryId: string}) {
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold">{day.day_id}</h2>
           <Button asChild variant="outline">
-            <Link href={`/itinerary/${itineraryId}/day/${day.day_id.toLowerCase().replace(" ", "-")}`}>
+            <Link href={`/itinerary/${itineraryId}/day/${day.day_id}`}>
               View Details
             </Link>
           </Button>

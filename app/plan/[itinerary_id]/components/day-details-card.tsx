@@ -12,7 +12,7 @@ function DayDetailsCard({itineraryId, day}: {itineraryId: string, day: DayDetail
 
   return (
     <div className="space-y-3" key={day.day_id}>
-      <Link href={`/plan/${itineraryId}/day/${day.day_id.toLowerCase().replace(" ", "-")}`}>
+      <Link href={`/plan/${itineraryId}/day/${day.day_id}`}>
         <Card className="hover:shadow-md transition-shadow cursor-pointer overflow-hidden border-l-4 border-l-teal-500 dark:border-l-teal-400 w-full">
           <CardHeader className="pb-2">
             <CardTitle className="flex justify-between items-center">

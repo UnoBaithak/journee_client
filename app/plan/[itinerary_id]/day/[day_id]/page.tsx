@@ -1,8 +1,6 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 import Link from "next/link"
 import { Calendar, MapPin, Clock, ArrowLeft, Send, PlusCircle, Edit, Trash2 } from "lucide-react"
@@ -13,13 +11,14 @@ import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { useConversation } from "@/app/plan/conversation_context"
 import { formatTime, getCategoryColor } from "@/utils/itinerary-utils"
+import { DayDetails, Itinerary } from "@/types/itinerary"
 
 export default function DayPlanPage() {
   const params = useParams()
   const itineraryId = params.itinerary_id as string
   const dayId = params.day_id as string
-  const formattedDayId = dayId.replace("-", " ").replace(/\b\w/g, (l) => l.toUpperCase())
-  const dayNumber = parseInt(dayId.split("-").at(1)?.trim() ?? "1")
+  const formattedDayId = `Day ${dayId}`
+  const dayNumber = parseInt(dayId)
 
   const {conversationDetails, setConversationDetails} = useConversation();
   const itineraryDetails = conversationDetails?.itineraryDetails;
