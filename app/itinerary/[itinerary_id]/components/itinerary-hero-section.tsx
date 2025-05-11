@@ -6,11 +6,15 @@ import { Itinerary } from '@/types/itinerary'
 import { useRouter } from 'next/navigation'
 
 
-function Header({itineraryDetails, itineraryId}: {itineraryDetails: Itinerary, itineraryId: string}) {
+function ItineraryHeroSection({ itineraryDetails, itineraryId, canEdit }: { itineraryDetails: Itinerary, itineraryId: string, canEdit: boolean }) {
     const router = useRouter();
 
     const editItinerary = () => {
         router.push(`/plan/${itineraryId}`)
+    }
+
+    const cloneItinerary = () => {
+        alert("You chose to clone this itinerary")
     }
 
     return (
@@ -47,10 +51,12 @@ function Header({itineraryDetails, itineraryId}: {itineraryDetails: Itinerary, i
                     </div>
                     <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-md">{itineraryDetails.title}</h1>
                     <div className="flex flex-wrap gap-3">
-                        <Button onClick={editItinerary} className="bg-teal-600 hover:bg-teal-700">
+
+                        <Button onClick={canEdit ? editItinerary : cloneItinerary} className="bg-teal-600 hover:bg-teal-700">
                             <Edit className="mr-2 h-4 w-4" />
-                            Edit with AI
+                            {canEdit ? "Edit with AI ": "Clone"}
                         </Button>
+
                         <Button
                             variant="outline"
                             className="bg-white/20 backdrop-blur-sm text-white border-white/40 hover:bg-white/30"
@@ -79,4 +85,4 @@ function Header({itineraryDetails, itineraryId}: {itineraryDetails: Itinerary, i
     )
 }
 
-export default Header
+export default ItineraryHeroSection

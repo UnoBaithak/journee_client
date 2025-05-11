@@ -21,7 +21,7 @@ export default function PlanPage() {
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/itinerary/generate`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/plan`, {
       method: "POST",
       body: JSON.stringify({"user_input": searchQuery}),
       headers: {
@@ -30,7 +30,7 @@ export default function PlanPage() {
     })
     
     let {conversation_id, itinerary_id} = await res.json();
-    setConversationDetails({conversation_id, itinerary_id})
+    setConversationDetails({conversation_id, itinerary_id, itineraryDetails: null})
     router.push(`/plan/${itinerary_id}`)
     setLoading(false)
   }

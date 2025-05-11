@@ -1,11 +1,13 @@
 // context/ItineraryContext.tsx
 'use client';
 
+import { Itinerary } from '@/types/itinerary';
 import { createContext, useContext, useState } from 'react';
 
 interface ConversationDetails {
     conversation_id: string,
-    itinerary_id: string
+    itinerary_id: string,
+    itineraryDetails: Itinerary | null
 }
 
 const ConversationContext = createContext<{ conversationDetails: ConversationDetails | null, setConversationDetails: (itinerary: ConversationDetails) => void } 

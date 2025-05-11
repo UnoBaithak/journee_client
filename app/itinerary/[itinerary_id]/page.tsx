@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useItinerary } from "../itinerary_context"
-import Header from "./components/header"
+import ItineraryHeroSection from "./components/itinerary-hero-section"
 import OverviewFragment from "./components/overview-fragment"
 import DocumentsFragment from "./components/documents-fragment"
 import MapFragment from "./components/map-fragment"
@@ -20,14 +20,16 @@ export default function ItineraryViewPage() {
   const itineraryId = params.itinerary_id as string
 
   const { itineraryDetails, setItineraryDetails } = useItinerary();
+  const [canEdit, setCanEdit] = useState(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchItinerary = async () => {
       try {
         // Simulating API call delay
-        const itinerary = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/itinerary/${itineraryId}`)).json();
-        setItineraryDetails(itinerary)
+        const response = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/itinerary/${itineraryId}`)).json();
+        setItineraryDetails(response["itinerary"])
+        setCanEdit(response["canEdit"])
         setLoading(false)
       } catch (error) {
         console.error("Error fetching itinerary:", error)
@@ -81,7 +83,7 @@ export default function ItineraryViewPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-sky-50 dark:from-gray-900 dark:to-gray-800">
       {/* Hero section with background */}
-      <Header itineraryDetails={itineraryDetails} itineraryId={itineraryId} />
+      <ItineraryHeroSection canEdit={canEdit} itineraryDetails={itineraryDetails} itineraryId={itineraryId} />
 
       <div className="p-4 md:p-8">
         <div className="max-w-6xl mx-auto">

@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import SignUpForm from "@/components/sign-up-form"
-import LoginForm from "@/components/login-form"
+import SignUpForm from "@/app/auth/components/sign-up-form"
+import LoginForm from "@/app/auth/components/login-form"
 import TravelImage from "@/components/travel-image"
 
 export default function AuthPage() {

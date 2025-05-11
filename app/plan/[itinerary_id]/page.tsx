@@ -10,6 +10,7 @@ import Header from "./components/header"
 import ChatBar from "./components/chatbar"
 import ResultBlock from "./components/result-block"
 import { Itinerary } from "@/types/itinerary"
+import { useConversation } from "../conversation_context"
 
 export default function ItineraryPlanPage() {
     const params = useParams()
@@ -17,6 +18,7 @@ export default function ItineraryPlanPage() {
     const itineraryId = params.itinerary_id as string
 
     const [itinerary, setItinerary] = useState<Itinerary | null>(null)
+    const { conversationDetails, setConversationDetails } = useConversation();
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -26,6 +28,13 @@ export default function ItineraryPlanPage() {
                 const data = await response.json()
 
                 setItinerary(data)
+                if (conversationDetails?.itinerary_id && conversationDetails?.conversation_id) {
+                    setConversationDetails({ 
+                        itinerary_id: conversationDetails?.itinerary_id, 
+                        conversation_id: conversationDetails?.conversation_id, 
+                        itineraryDetails: data 
+                    })
+                }
                 setLoading(false)
             } catch (error) {
                 console.error("Error fetching itinerary:", error)
@@ -34,7 +43,7 @@ export default function ItineraryPlanPage() {
         }
 
         fetchItinerary()
-    }, [itineraryId])
+    }, [itineraryId, conversationDetails?.conversation_id, conversationDetails?.itinerary_id])
 
     const saveItinerary = () => {
         router.push(`/itinerary/${itineraryId}`)

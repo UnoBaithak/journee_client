@@ -8,13 +8,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card } from "@/components/ui/card"
-import { Mail, Lock, User } from "lucide-react"
-import GoogleSignIn from "@/components/google-sign-in"
+import { Mail, Lock } from "lucide-react"
+import GoogleSignIn from "@/app/auth/components/google-sign-in"
 
-export default function SignUpForm() {
+export default function LoginForm() {
   const router = useRouter()
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
   })
@@ -27,12 +26,11 @@ export default function SignUpForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Handle form submission here
-    console.log("Sign up data:", formData)
+    console.log("Login data:", formData)
 
-    // In a real app, you would send this data to your API
-    // For now, simulate creating a user and redirect to create password page
-    const userId = "new-user-123" // This would come from your API
-    router.push(`/auth/${userId}/create_password`)
+    // In a real app, you would authenticate with your API
+    // For now, simulate login and redirect to plan page
+    router.push("/plan")
   }
 
   const handleGoogleSignIn = (response: any) => {
@@ -40,15 +38,14 @@ export default function SignUpForm() {
     console.log("Google Sign-In successful:", response)
     // You would typically send this to your backend
 
-    // For now, simulate creating a user and redirect to create username page
-    const userId = "google-user-123" // This would come from your API
-    router.push(`/auth/${userId}/create_username`)
+    // For now, simulate login and redirect to plan page
+    router.push("/plan")
   }
 
   return (
     <Card className="p-6">
       <div className="space-y-6">
-        <GoogleSignIn text={"singup_with"} onSuccess={handleGoogleSignIn} />
+        <GoogleSignIn text={"signin_with"} onSuccess={handleGoogleSignIn} />
 
         <div className="relative flex items-center">
           <div className="flex-grow border-t border-gray-200"></div>
@@ -57,22 +54,6 @@ export default function SignUpForm() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">Full Name</Label>
-            <div className="relative">
-              <Input
-                id="name"
-                name="name"
-                placeholder="John Doe"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="pl-10"
-              />
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            </div>
-          </div>
-
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <div className="relative">
@@ -107,21 +88,26 @@ export default function SignUpForm() {
             </div>
           </div>
 
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="remember"
+                className="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-teal-500"
+              />
+              <Label htmlFor="remember" className="text-sm">
+                Remember me
+              </Label>
+            </div>
+            <a href="#" className="text-sm text-teal-600 hover:underline">
+              Forgot password?
+            </a>
+          </div>
+
           <Button type="submit" className="w-full bg-teal-600 hover:bg-teal-700">
-            Sign Up
+            Log In
           </Button>
         </form>
-
-        <p className="text-xs text-center text-gray-500">
-          By signing up, you agree to our{" "}
-          <a href="#" className="text-teal-600 hover:underline">
-            Terms of Service
-          </a>{" "}
-          and{" "}
-          <a href="#" className="text-teal-600 hover:underline">
-            Privacy Policy
-          </a>
-        </p>
       </div>
     </Card>
   )

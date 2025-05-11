@@ -6,12 +6,15 @@ import { Avatar } from '@/components/ui/avatar'
 import { AvatarFallback } from '@radix-ui/react-avatar'
 import { Button } from '@/components/ui/button'
 import { Send } from 'lucide-react'
+import { useConversation } from '../../conversation_context'
 
 function ChatBar() {
     const [userInput, setUserInput] = React.useState("")
 
+    const {conversationDetails, setConversationDetails} = useConversation()
+
     const handleSubmit = async (e: React.FormEvent) => {
-        console.log(e)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/`)
     }
     return (
         <div className="py-2 px-4 rounded-xl shadow-slate-500 drop-shadow-lg border-t bg-white dark:bg-gray-800 dark:border-gray-700 shadow-lg absolute bottom-3 left-[1/4] lg:left-1/2 lg:-translate-x-1/2 w-1/2 lg:w-[2/5]">
