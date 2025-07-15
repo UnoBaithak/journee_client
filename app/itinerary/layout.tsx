@@ -1,5 +1,5 @@
 // app/itinerary/layout.tsx
-import { ItineraryProvider } from '@/app/itinerary/itinerary_context';
+import { ItineraryProvider } from '@/context/itinerary-context';
 
 export default function ItineraryLayout({ children }: { children: React.ReactNode }) {
     return (

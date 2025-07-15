@@ -39,7 +39,7 @@ export default function SignUpForm() {
     // Handle Google Sign-In response
     console.log("Google Sign-In successful:", response)
     // You would typically send this to your backend
-
+    localStorage.setItem("logged_in_state", "true")
     // For now, simulate creating a user and redirect to create username page
     const userId = "google-user-123" // This would come from your API
     router.push(`/auth/${userId}/create_username`)

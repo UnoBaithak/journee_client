@@ -2,8 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { ThemeToggle } from "@/components/theme-toggle"
+import Navbar from "@/components/navbar"
+import { SessionContextProvider } from "@/context/session-context"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -18,15 +18,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <div className="fixed top-4 right-4 z-50">
-            <ThemeToggle />
+    <SessionContextProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={inter.className}>
+          <div className="fixed top-0 z-50 w-[99%] mx-[0.5%] mt-[0.2%]">
+            <Navbar />
           </div>
           {children}
-        </ThemeProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </SessionContextProvider>
   )
 }

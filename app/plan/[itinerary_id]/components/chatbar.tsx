@@ -6,7 +6,7 @@ import { Avatar } from '@/components/ui/avatar'
 import { AvatarFallback } from '@radix-ui/react-avatar'
 import { Button } from '@/components/ui/button'
 import { Send } from 'lucide-react'
-import { useConversation } from '../../conversation_context'
+import { useConversation } from '../../../../context/conversation-context'
 
 function ChatBar() {
     const [userInput, setUserInput] = React.useState("")

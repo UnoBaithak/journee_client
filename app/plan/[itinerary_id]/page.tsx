@@ -10,7 +10,7 @@ import Header from "./components/header"
 import ChatBar from "./components/chatbar"
 import ResultBlock from "./components/result-block"
 import { Itinerary } from "@/types/itinerary"
-import { useConversation } from "../conversation_context"
+import { useConversation } from "../../../context/conversation-context"
 
 export default function ItineraryPlanPage() {
     const params = useParams()

@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { useConversation } from "@/app/plan/conversation_context"
+import { useConversation } from "@/context/conversation-context"
 import { formatTime, getCategoryColor } from "@/utils/itinerary-utils"
 import { DayDetails, Itinerary } from "@/types/itinerary"
 
