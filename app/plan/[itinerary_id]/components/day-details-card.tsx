@@ -1,14 +1,13 @@
 "use client"
 
-import React from 'react'
 import Link from 'next/link'
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ChevronRight, Clock } from 'lucide-react'
 import { Badge } from 'lucide-react'
 import { DayDetails } from '@/types/itinerary'
 import { formatTime, getCategoryColor } from '@/utils/itinerary-utils'
 
-function DayDetailsCard({itineraryId, day}: {itineraryId: string, day: DayDetails}) {
+function DayDetailsCard({ itineraryId, day }: { itineraryId: string, day: DayDetails }) {
 
   return (
     <div className="space-y-3" key={day.day_id}>
@@ -35,7 +34,7 @@ function DayDetailsCard({itineraryId, day}: {itineraryId: string, day: DayDetail
                     <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
                       <Clock className="h-3 w-3" />
                       {formatTime(activity.time)} • {activity.duration}{" "}
-                      {activity.duration === 1 ? "hour" : "hours"}
+                      {activity.duration === 1 ? "minute" : "minutes"}
                     </p>
                   </div>
                 </li>

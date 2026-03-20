@@ -15,13 +15,13 @@ export default function Loading() {
   return (
     <main className="min-h-screen flex flex-col bg-gradient-to-b from-white to-sky-50 dark:from-gray-900 dark:to-gray-800">
       {/* Header with background */}
-      <div className="relative h-[30vh] w-full overflow-hidden">
+      <div className="relative w-full overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center animate-pulse"
-          style={{
-            backgroundImage: "url('/placeholder.svg?height=1080&width=1920')",
-            backgroundPosition: "center",
-          }}
+        // style={{
+        //   backgroundImage: "url('/placeholder.svg?height=1080&width=1920')",
+        //   backgroundPosition: "center",
+        // }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-teal-500/30 to-blue-500/30 dark:from-teal-900/50 dark:to-blue-900/50"></div>
         </div>

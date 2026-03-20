@@ -1,16 +1,14 @@
 "use client"
 
-import type React from "react"
 
 import { useState, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import Header from "./components/header"
-import ChatBar from "./components/chatbar"
 import ResultBlock from "./components/result-block"
 import { Itinerary } from "@/types/itinerary"
 import { useConversation } from "../../../context/conversation-context"
+import { Header } from "@/components/header"
 
 export default function ItineraryPlanPage() {
     const params = useParams()
@@ -34,9 +32,9 @@ export default function ItineraryPlanPage() {
                 }
 
                 setItinerary(data["itinerary"])
-                if (conversationDetails?.itinerary_id) {
-                    setConversationDetails({ 
-                        itinerary_id: conversationDetails?.itinerary_id, 
+                if (itineraryId) {
+                    setConversationDetails({
+                        itinerary_id: itineraryId,
                         itineraryDetails: data["itinerary"]
                     })
                 }
@@ -126,9 +124,10 @@ export default function ItineraryPlanPage() {
 
     return (
         <main className="min-h-screen flex flex-col bg-gradient-to-b from-white to-sky-50 dark:from-gray-900 dark:to-gray-800">
-            <Header imageUrl="" itineraryTitle={itinerary.title} itineraryMetadata={itinerary.metadata} />
+            {/* <Header imageUrl="" itineraryTitle={itinerary.title} itineraryMetadata={itinerary.metadata} /> */}
+            <Header />
             <ResultBlock itinerary={itinerary} itineraryId={itineraryId} />
-            <ChatBar />
+            {/* <ChatBar /> */}
         </main>
     )
 }
